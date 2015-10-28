@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.3)
 project(pcl_multi_openni2_recorder)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin)
 
 find_package(PCL 1.7 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
@@ -15,3 +16,4 @@ set(SOURCE_FILES src/main.cpp src/PCDBuffer.h src/Producer.h src/Consumer.h src/
 add_executable(pcl_multi_openni2_recorder ${SOURCE_FILES})
 
 target_link_libraries(pcl_multi_openni2_recorder ${PCL_LIBRARIES})
+
