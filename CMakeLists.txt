@@ -9,8 +9,8 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-set(SOURCE_FILES main.cpp PCDBuffer.h Producer.h Consumer.h Util.h
-        Timer.h Logger.h Logger.cpp CloudRecord.h RecorderNode.h Recorder.h)
+set(SOURCE_FILES src/main.cpp src/PCDBuffer.h src/Producer.h src/Consumer.h src/Util.h
+        src/Timer.h src/Logger.h src/Logger.cpp src/CloudRecord.h src/RecorderNode.h src/Recorder.h)
 
 add_executable(pcl_multi_openni2_recorder ${SOURCE_FILES})
 
