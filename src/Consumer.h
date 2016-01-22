@@ -18,7 +18,7 @@ private:
     void writeToDisk (const boost::shared_ptr<CloudRecord<PointT>> record) {
         if(record) {
             std::stringstream ss;
-            ss << id_ << "-" << record->getName() << ".pcd";
+            ss << id_ + 1 << "/" << id_ << "-" << record->getName() << ".pcd";
             writer_.writeBinaryCompressed (std::move(ss.str()), *(record->getCloud()));
             writer_timer_->time(buf_);
         }
@@ -49,6 +49,9 @@ public:
     void start() {
         std::stringstream ss;
         ss << "Device " << id_ << ", write callback";
+        std::stringstream ss1;
+        ss1 << id_ + 1;
+        mkdir(ss1.str().c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
         writer_timer_.reset (new Timer<PointT>(ss.str()));
         thread_.reset (new boost::thread (boost::bind (&Consumer::receiveAndProcess, this)));
     }

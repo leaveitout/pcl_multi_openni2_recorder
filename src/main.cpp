@@ -45,6 +45,7 @@
 #include "Util.h"
 #include "Logger.h"
 #include "Recorder.h"
+#include "CameraIntrinsicsLoader.hpp"
 
 using namespace std;
 using namespace pcl;
@@ -211,10 +212,19 @@ int main (int argc, char** argv) {
 
     for(auto id: device_ids) {
         NI2Grabber::Ptr grabber(new NI2Grabber(id));
+        std::stringstream ss;
+        ss << "Device string: (" << id << ")" << std::endl;
+        Logger::log(Logger::INFO, ss.str());
+        int id_num = std::stoi(id.substr(1));
+//        CameraIntrinsicsLoader::applyIntrinsics((size_t)id_num, grabber);
+        CameraIntrinsicsLoader::copyIntrinsicsToOutputDir((size_t)id_num);
         grabbers.push_back(grabber);
         cout << "Device id " << id << endl;
         Logger::log(Logger::INFO, id);
     }
+
+    if(device_ids.size() == 3)
+        CameraIntrinsicsLoader::copyExtrinsicsToOutputDir();
 
     // TODO: Resolve this
     // int buff_size = (int)(TOTAL_BUFFER_SIZE / grabbers.size());
