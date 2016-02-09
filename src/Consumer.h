@@ -18,7 +18,7 @@ private:
     void writeToDisk (const boost::shared_ptr<CloudRecord<PointT>> record) {
         if(record) {
             std::stringstream ss;
-            ss << id_ + 1 << "/" << id_ << "-" << record->getName() << ".pcd";
+            ss << id_ + 1 << "/" << id_ + 1 << "-" << record->getName() << ".pcd";
             writer_.writeBinaryCompressed (std::move(ss.str()), *(record->getCloud()));
             writer_timer_->time(buf_);
         }

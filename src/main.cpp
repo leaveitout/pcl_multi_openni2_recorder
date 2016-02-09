@@ -86,6 +86,7 @@ void printHelp (int default_buff_size, int, char **argv) {
     print_info ("%s -h | --help : shows this help\n", argv [0]);
     print_info ("%s -xyz : save only XYZ data, even if the device is RGB capable\n", argv [0]);
     print_info ("%s -shift : use OpenNI shift values rather than 12-bit depth\n", argv [0]);
+    print_info ("%s -noi : do not use saved intrinsics when recording\n", argv [0]);
     print_info ("%s -buf X ; use a buffer size of X frames (default: ", argv [0]);
     print_value ("%d", default_buff_size); print_info (")\n");
     print_info ("%s -l : list all available devices\n", argv [0]);
@@ -195,6 +196,7 @@ int main (int argc, char** argv) {
     }
 
     bool just_xyz = find_switch (argc, argv, "-xyz");
+    bool use_saved_intrinsics = !find_switch (argc, argv, "-noi");
     // TODO: Check that this is the default one, i.e. OpenNIDevice::OpenNI_12_bit_depth
 //    auto depth_mode = pcl::io::openni2::PIXEL_FORMAT_DEPTH_1_MM;
 //    if (find_switch (argc, argv, "-shift"))
@@ -216,14 +218,16 @@ int main (int argc, char** argv) {
         ss << "Device string: (" << id << ")" << std::endl;
         Logger::log(Logger::INFO, ss.str());
         int id_num = std::stoi(id.substr(1));
-//        CameraIntrinsicsLoader::applyIntrinsics((size_t)id_num, grabber);
-        CameraIntrinsicsLoader::copyIntrinsicsToOutputDir((size_t)id_num);
+        if(use_saved_intrinsics) {
+            CameraIntrinsicsLoader::applyIntrinsics((size_t)id_num, grabber);
+            CameraIntrinsicsLoader::copyIntrinsicsToOutputDir((size_t)id_num);
+        }
         grabbers.push_back(grabber);
-        cout << "Device id " << id << endl;
+        cout << "Device id " << grabber->getName() << endl;
         Logger::log(Logger::INFO, id);
     }
 
-    if(device_ids.size() == 3)
+    if(device_ids.size() == 3 && use_saved_intrinsics)
         CameraIntrinsicsLoader::copyExtrinsicsToOutputDir();
 
     // TODO: Resolve this
