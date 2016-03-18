@@ -15,6 +15,9 @@ class PCDBuffer
 public:
     PCDBuffer () {}
 
+    static constexpr int DEFAULT_WAKEUP_TIME = 10000;
+
+
     // thread-safe wrapper for push_back() method of ciruclar_buffer
     bool pushBack(const boost::shared_ptr<CloudRecord<PointT>> record);
 
@@ -73,7 +76,7 @@ const boost::shared_ptr<CloudRecord <PointT>> PCDBuffer<PointT>::getFront() {
     {
         boost::mutex::scoped_lock buff_lock(bmutex_);
         while (buffer_.empty()) {
-            boost::chrono::microseconds period(50);
+            boost::chrono::microseconds period( DEFAULT_WAKEUP_TIME );
             boost::chrono::system_clock::time_point wake_up_time = boost::chrono::system_clock::now() + period;
             if(buff_empty_.wait_until(buff_lock, wake_up_time) == boost::cv_status::timeout)
                 return nullptr;
