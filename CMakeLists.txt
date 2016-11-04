@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.2)
 
 project(pcl_multi_openni2_recorder)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin)
 
 find_package(PCL 1.7 REQUIRED)
