@@ -77,10 +77,10 @@ bool CameraIntrinsicsLoader::copyIntrinsicsToOutputDir(size_t camera_num) {
 }
 
 bool ::CameraIntrinsicsLoader::copyExtrinsicsToOutputDir() {
-    std::string stereo_1_2_filepath = "/home/sean/Documents/cameraparams/12stereo.yml";
-    std::string stereo_3_2_filepath = "/home/sean/Documents/cameraparams/32stereo.yml";
-    std::string stereo_1_2_output = "12stereo.yml";
-    std::string stereo_3_2_output = "32stereo.yml";
+    std::string stereo_1_2_filepath = "/home/sean/Documents/cameraparams/12outputparams.yml";
+    std::string stereo_3_2_filepath = "/home/sean/Documents/cameraparams/32outputparams.yml";
+    std::string stereo_1_2_output = "12outputparams.yml";
+    std::string stereo_3_2_output = "32outputparams.yml";
 
     std::ifstream  src1(stereo_1_2_filepath , std::ios::binary);
     std::ofstream  dst1(stereo_1_2_output, std::ios::binary);

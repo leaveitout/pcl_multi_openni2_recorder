@@ -227,7 +227,7 @@ int main (int argc, char** argv) {
         Logger::log(Logger::INFO, id);
     }
 
-    if(device_ids.size() == 3 && use_saved_intrinsics)
+    if(device_ids.size() == 3)
         CameraIntrinsicsLoader::copyExtrinsicsToOutputDir();
 
     // TODO: Resolve this
@@ -260,6 +260,8 @@ int main (int argc, char** argv) {
             stop_recording.wait(lock);
         recorder.stop();
     }
+
+    // Copy the saved extrinsics to the same folder
 
     return (0);
 }
