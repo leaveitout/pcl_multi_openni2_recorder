@@ -60,8 +60,9 @@ size_t getSystemMemory();
 const size_t DEFAULT_BUFFER_SIZE = 200;
 
 // TODO: Add in the amount needed for the string name
-const size_t TOTAL_BUFFER_SIZE = max( DEFAULT_BUFFER_SIZE,
-                                size_t(getSystemMemory() / (2*640 * 480 * sizeof(pcl::PointXYZRGBA))));
+//const size_t TOTAL_BUFFER_SIZE = max( DEFAULT_BUFFER_SIZE,
+                                //size_t(getSystemMemory() / (640 * 480 * sizeof(pcl::PointXYZRGBA))));
+const size_t TOTAL_BUFFER_SIZE = 2000;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
