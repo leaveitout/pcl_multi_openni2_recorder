@@ -35,9 +35,12 @@ public:
         size_t id = 0;
         for(auto grabber : grabbers) {
             boost::shared_ptr<RecorderNode <PointT>> new_node(new RecorderNode<PointT>(grabber, id, buffer_size));
-            boost::function<void (void)> start_callback =
-                    boost::bind(&RecorderNode<PointT>::start, new_node);
-            connections_.push_back(connectStart(start_callback));
+
+            new_node->start ();
+//            boost::function<void (void)> start_callback =
+//                    boost::bind(&RecorderNode<PointT>::start, new_node);
+//            connections_.push_back(connectStart(start_callback));
+
             boost::function<void (void)> stop_callback = boost::bind(&RecorderNode<PointT>::stop, new_node);
             connections_.push_back(connectStop(stop_callback));
             nodes_.push_back(new_node);
