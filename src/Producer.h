@@ -18,9 +18,9 @@ class Producer {
 private:
     void grabberCallBack (const typename PointCloud<PointT>::ConstPtr& cloud) {
         // TODO: Remove next line once checked
-        std::stringstream ss;
-        ss << "Producer " << id_ << " operating on thread " << boost::this_thread::get_id() << std::endl;
-        Logger::log(Logger::DEBUG, ss.str());
+//        std::stringstream ss;
+//        ss << "Producer " << id_ << " operating on thread " << boost::this_thread::get_id() << std::endl;
+//        Logger::log(Logger::DEBUG, ss.str());
 
         std::string time = boost::posix_time::to_iso_string(boost::posix_time::microsec_clock::local_time ());
         boost::shared_ptr<CloudRecord<PointT>> cloud_record(new CloudRecord<PointT>(cloud, std::move(time)));
