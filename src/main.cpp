@@ -215,6 +215,8 @@ int main (int argc, char** argv) {
 
     for(auto id: device_ids) {
         NI2Grabber::Ptr grabber(new NI2Grabber(id));
+        // Make sure that it is stopped
+        grabber->stop ();
         std::stringstream ss;
         ss << "Device string: (" << id << ")" << std::endl;
         Logger::log(Logger::INFO, ss.str());
